@@ -399,10 +399,6 @@ const lastUpdated = document.getElementById("lastUpdated");
 const headers = document.querySelectorAll("th[data-sort-key]");
 const tabButtons = document.querySelectorAll(".tab-btn[data-custody]");
 
-const correctionForm = document.getElementById("correctionForm");
-const correctionHelp = document.getElementById("formHelp");
-const cardSubmissionForm = document.getElementById("cardSubmissionForm");
-const cardSubmissionHelp = document.getElementById("cardSubmissionHelp");
 
 let sortState = { key: "name", direction: "asc" };
 let activeCustody = "all";
@@ -660,92 +656,6 @@ tabButtons.forEach((btn) => {
 [searchInput, regionFilter].forEach((el) => {
   el.addEventListener("input", updateTable);
   el.addEventListener("change", updateTable);
-});
-
-correctionForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  if (!correctionForm.checkValidity()) {
-    correctionHelp.classList.add("error");
-    correctionHelp.textContent = "Please fill all required fields before sending.";
-    correctionForm.reportValidity();
-    return;
-  }
-
-  const nameValue = document.getElementById("name").value.trim() || "Not provided";
-  const emailValue = document.getElementById("email").value.trim();
-  const cardValue = document.getElementById("card").value.trim();
-  const detailsValue = document.getElementById("details").value.trim();
-
-  const subject = encodeURIComponent(`Correction for ${cardValue} on Cryptocardlist`);
-  const body = encodeURIComponent(
-    [
-      "Hi, I found a card data update:",
-      "",
-      `Name: ${nameValue}`,
-      `Email: ${emailValue}`,
-      `Card: ${cardValue}`,
-      "",
-      "Details:",
-      detailsValue,
-      "",
-      "Source links:",
-      "- "
-    ].join("\n")
-  );
-
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  correctionHelp.classList.remove("error");
-  correctionHelp.textContent = "Thanks. Your email app should open with the correction draft.";
-});
-
-cardSubmissionForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  if (!cardSubmissionForm.checkValidity()) {
-    cardSubmissionHelp.classList.add("error");
-    cardSubmissionHelp.textContent = "Please fill all required fields before sending.";
-    cardSubmissionForm.reportValidity();
-    return;
-  }
-
-  const submitterName = document.getElementById("submitterName").value.trim() || "Not provided";
-  const submitterEmail = document.getElementById("submitterEmail").value.trim();
-  const submitCardName = document.getElementById("submitCardName").value.trim();
-  const submitProvider = document.getElementById("submitProvider").value.trim();
-  const submitRegion = document.getElementById("submitRegion").value.trim();
-  const submitCustody = document.getElementById("submitCustody").value;
-  const submitRewards = document.getElementById("submitRewards").value.trim();
-  const submitMonthlyCap = document.getElementById("submitMonthlyCap").value.trim() || "Not provided";
-  const submitFees = document.getElementById("submitFees").value.trim();
-  const submitSources = document.getElementById("submitSources").value.trim() || "Not provided";
-  const submitNotes = document.getElementById("submitNotes").value.trim();
-
-  const subject = encodeURIComponent(`New card submission: ${submitCardName}`);
-  const body = encodeURIComponent(
-    [
-      "Hi, I want to submit a crypto card for review:",
-      "",
-      `Name: ${submitterName}`,
-      `Email: ${submitterEmail}`,
-      "",
-      `Card: ${submitCardName}`,
-      `Provider: ${submitProvider}`,
-      `Region(s): ${submitRegion}`,
-      `Custody model: ${submitCustody}`,
-      `Rewards summary: ${submitRewards}`,
-      `Monthly cashback cap: ${submitMonthlyCap}`,
-      `Fees summary: ${submitFees}`,
-      `Source links: ${submitSources}`,
-      "",
-      "Notes:",
-      submitNotes
-    ].join("\n")
-  );
-
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  cardSubmissionHelp.classList.remove("error");
-  cardSubmissionHelp.textContent = "Thanks. Your email app should open with the new-card draft.";
 });
 
 lastUpdated.textContent = new Date().toLocaleDateString(undefined, {
