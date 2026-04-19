@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Card Compare | Cryptocardlist</title>
+    <meta
+      name="description"
+      content="Compare crypto cards by custody model, cashback and rewards, fees, and other key features."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Public+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="cloudflare-beacon.js"></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <header class="hero container">
+      <p class="eyebrow">Cryptocardlist</p>
+      <h1>CryptoCardList</h1>
+      <p class="hero-copy">
+        Side-by-side crypto card comparison for custody system, cashback and other rewards,
+        fees, and practical details that affect real spending.
+      </p>
+      <div class="hero-note" role="note" aria-label="estimate disclaimer">
+        <strong>Important:</strong> figures on this site are estimates and may change without notice.
+        Always confirm directly with each card provider.
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="tab-bar" role="group" aria-label="Filter by custody type">
+        <span class="tab-bar-label">Custody</span>
+        <button class="tab-btn is-active" data-custody="all">All</button>
+        <button class="tab-btn" data-custody="Custodial">Custodial</button>
+        <button class="tab-btn" data-custody="Hybrid">Hybrid</button>
+        <button class="tab-btn" data-custody="Self-custody">Self-custody</button>
+      </div>
+
+      <section class="controls" aria-label="table filters">
+        <div class="control-group">
+          <label for="searchInput">Search cards</label>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search by name, rewards, region..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="control-group">
+          <label for="regionFilter">Region</label>
+          <select id="regionFilter">
+            <option value="all">All regions</option>
+            <option value="Global">Global</option>
+            <option value="US">US</option>
+            <option value="EU/UK">EU/UK</option>
+            <option value="APAC">APAC</option>
+            <option value="LATAM">LATAM</option>
+            <option value="UK">UK</option>
+            <option value="Canada">Canada</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="table-wrap" aria-label="crypto card comparison table">
+        <table id="cardsTable">
+          <caption>
+            Estimated comparison overview including monthly cashback cap estimates. Click a
+            column heading to sort.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" data-sort-key="name">Card</th>
+              <th scope="col" data-sort-key="custody">Custody</th>
+              <th scope="col" data-sort-key="rewards">Cashback / Rewards</th>
+              <th scope="col" data-sort-key="cashbackCapLow">Cap (Low Tier)</th>
+              <th scope="col" data-sort-key="cashbackCapHigh">Cap (High Tier)</th>
+              <th scope="col" data-sort-key="monthlyFee">Monthly Fee</th>
+              <th scope="col" data-sort-key="fxFee">FX Fee</th>
+              <th scope="col" data-sort-key="regions">Regions Served</th>
+              <th scope="col" data-sort-key="extras">Important Features</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </section>
+
+      <p id="resultsSummary" class="results-summary" aria-live="polite"></p>
+
+      <section class="methodology" aria-label="methodology and estimate disclosure">
+        <h2>How To Read This Data</h2>
+        <ul>
+          <li>All card values are estimates and should be treated as informational only.</li>
+          <li>Fee and reward programs can change at any time by region and card tier.</li>
+          <li>Monthly cashback cap values are normalized to monthly estimates where possible.</li>
+          <li>Custody labels are simplified to help quick comparison.</li>
+          <li>Card click-through estimates are measured through Cryptocardlist redirect links.</li>
+          <li>Always review each issuer's current terms before applying or spending.</li>
+        </ul>
+        <p class="timestamp">Last updated: <span id="lastUpdated"></span></p>
+      </section>
+
+      <section class="contact" id="contact" aria-label="contact and corrections">
+        <h2>Suggest A Correction</h2>
+        <p>
+          Spot a mistake or a missing card? Send a correction and I can review it for an update.
+          Please include the card name, what looks wrong, and your source link.
+        </p>
+
+        <form id="correctionForm" novalidate>
+          <div class="form-row">
+            <label for="name">Your name (optional)</label>
+            <input id="name" name="name" type="text" placeholder="Alex" />
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email (for follow-up)</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="form-row">
+            <label for="card">Card name</label>
+            <input id="card" name="card" type="text" placeholder="Example: Card X" required />
+          </div>
+
+          <div class="form-row">
+            <label for="details">Correction details</label>
+            <textarea
+              id="details"
+              name="details"
+              rows="5"
+              placeholder="What should be corrected? Include links to sources if possible."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit">Send correction</button>
+          <p class="form-help" id="formHelp">
+            The form opens your email app with a pre-filled message.
+          </p>
+        </form>
+      </section>
+
+      <section class="submission" id="submit-card" aria-label="submit a new crypto card">
+        <h2>Submit A Card</h2>
+        <p>
+          Know a crypto card that is missing? Submit it below and I can review it for inclusion.
+          Any published values will still be listed as estimates until verified.
+        </p>
+
+        <form id="cardSubmissionForm" novalidate>
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="submitterName">Your name (optional)</label>
+              <input id="submitterName" name="submitterName" type="text" placeholder="Alex" />
+            </div>
+
+            <div class="form-row">
+              <label for="submitterEmail">Email (for follow-up)</label>
+              <input
+                id="submitterEmail"
+                name="submitterEmail"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="submitCardName">Card name</label>
+              <input
+                id="submitCardName"
+                name="submitCardName"
+                type="text"
+                placeholder="Example: Card X"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="submitProvider">Provider / issuer</label>
+              <input
+                id="submitProvider"
+                name="submitProvider"
+                type="text"
+                placeholder="Example: Exchange or company name"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="submitRegion">Regions available</label>
+              <input
+                id="submitRegion"
+                name="submitRegion"
+                type="text"
+                placeholder="Example: US, EU/UK, APAC"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="submitCustody">Custody model</label>
+              <select id="submitCustody" name="submitCustody" required>
+                <option value="">Select one</option>
+                <option value="Custodial">Custodial</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Self-custody">Self-custody</option>
+                <option value="Unknown">Unknown / not sure</option>
+              </select>
+            </div>
+
+            <div class="form-row full">
+              <label for="submitRewards">Cashback / rewards summary</label>
+              <input
+                id="submitRewards"
+                name="submitRewards"
+                type="text"
+                placeholder="Example: Up to ~2% cashback"
+                required
+              />
+            </div>
+
+            <div class="form-row full">
+              <label for="submitMonthlyCap">Monthly cashback cap (if known)</label>
+              <input
+                id="submitMonthlyCap"
+                name="submitMonthlyCap"
+                type="text"
+                placeholder="Example: Up to $150/month, or No published cap"
+              />
+            </div>
+
+            <div class="form-row full">
+              <label for="submitFees">Fees summary</label>
+              <input
+                id="submitFees"
+                name="submitFees"
+                type="text"
+                placeholder="Example: $0 monthly, up to 1.5% FX"
+                required
+              />
+            </div>
+
+            <div class="form-row full">
+              <label for="submitSources">Source links (optional)</label>
+              <input
+                id="submitSources"
+                name="submitSources"
+                type="url"
+                placeholder="https://provider-site.example/card-terms"
+              />
+            </div>
+
+            <div class="form-row full">
+              <label for="submitNotes">Extra notes</label>
+              <textarea
+                id="submitNotes"
+                name="submitNotes"
+                rows="5"
+                placeholder="Anything else useful to include about this card."
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <button type="submit">Submit card listing</button>
+          <p class="form-help" id="cardSubmissionHelp">
+            The form opens your email app with a pre-filled new-card draft.
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <p>
+        Cryptocardlist is an independent comparison project. Content is provided as estimates, not
+        financial advice.
+      </p>
+    </footer>
+  </body>
+</html>
