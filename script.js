@@ -65,6 +65,10 @@ const cardLinks = {
   "Fold Card": {
     clickPath: "go/fold-card.html",
     sourceUrl: "https://foldapp.com/card"
+  },
+  "Bybit Card": {
+    clickPath: "go/bybit-card.html",
+    sourceUrl: "https://www.bybit.com/en/pay-rewards/promo/rewards-details/"
   }
 };
 
@@ -368,6 +372,26 @@ const cards = [
     network: "Visa",
     cardForm: "Both",
     extras: "Issued by Cross River Bank. Plan-based XRP rewards. Essential and Elite tiers with different reward caps and FX fees."
+  },
+  {
+    name: "Bybit Card",
+    logo: "https://www.google.com/s2/favicons?domain=bybit.com&sz=128",
+    custody: "Custodial",
+    rewards: "2% (Non-VIP) to 10% (Supreme VIP) cashback in USDT or BTC; tier based on Bybit VIP level",
+    cashbackCapLow: "$10/mo (Non-VIP)",
+    cashbackCapLowValue: 10,
+    cashbackCapHigh: "$600/mo (Supreme VIP)",
+    cashbackCapHighValue: 600,
+    monthlyFee: "$0",
+    monthlyFeeValue: 0,
+    fxFee: "0.5% (EEA) / 1% (Australia) / 7% (Argentina); + 0.9% crypto conversion fee",
+    fxFeeValue: 1,
+    availability: "Global",
+    regionTags: ["EU/UK", "APAC", "LATAM"],
+    regions: "EEA (excl. UK, France, Croatia, Iceland, Ireland, Liechtenstein, Romania), Australia, Argentina, Brazil, Mexico, APAC, Georgia. Not available in US, UK, Canada, or Singapore.",
+    network: "Mastercard",
+    cardForm: "Both",
+    extras: "VIP-tiered caps: Non-VIP $10/mo, VIP1 $75, VIP2 $150, VIP3 4% ($200), VIP4 6% ($300), VIP5 8% ($400), Supreme VIP 10% ($600). ATM: first €100/mo free, then 2%. BTC cashback option via Bybit EU. 10% promo cashback first month (up to $150 USDT) for new cardholders."
   },
   {
     name: "Fold Card",
