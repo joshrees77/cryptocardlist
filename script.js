@@ -69,6 +69,10 @@ const cardLinks = {
   "Bybit Card": {
     clickPath: "go/bybit-card.html",
     sourceUrl: "https://www.bybit.com/en/pay-rewards/promo/rewards-details/"
+  },
+  "Payy Card": {
+    clickPath: "go/payy-card.html",
+    sourceUrl: "https://www.payy.com"
   }
 };
 
@@ -392,6 +396,26 @@ const cards = [
     network: "Mastercard",
     cardForm: "Both",
     extras: "VIP-tiered caps: Non-VIP $10/mo, VIP1 $75, VIP2 $150, VIP3 4% ($200), VIP4 6% ($300), VIP5 8% ($400), Supreme VIP 10% ($600). ATM: first €100/mo free, then 2%. BTC cashback option via Bybit EU. 10% promo cashback first month (up to $150 USDT) for new cardholders."
+  },
+  {
+    name: "Payy Card",
+    logo: "https://www.google.com/s2/favicons?domain=payy.com&sz=128",
+    custody: "Self-custody",
+    rewards: "No cashback; referral program: 10,000 pts/referred friend (100,000 pts unlocks premium light-up physical card)",
+    cashbackCapLow: "N/A",
+    cashbackCapLowValue: 0,
+    cashbackCapHigh: "N/A",
+    cashbackCapHighValue: 0,
+    monthlyFee: "$0",
+    monthlyFeeValue: 0,
+    fxFee: "1% crypto conversion + 1.2% FX (~2.2% total); $0.20 small-tx fee after 5th tx; $0.50 decline fee after 3rd failure",
+    fxFeeValue: 2.2,
+    availability: "Global",
+    regionTags: ["Global"],
+    regions: "Global where App Store/Google Play operate; OFAC-sanctioned regions excluded.",
+    network: "Visa",
+    cardForm: "Both",
+    extras: "Privacy-focused via zero-knowledge proofs on Payy Network. USDC-funded, self-custodial. Apple Pay and Google Pay supported. Built by ex-Apple engineer."
   },
   {
     name: "Fold Card",
